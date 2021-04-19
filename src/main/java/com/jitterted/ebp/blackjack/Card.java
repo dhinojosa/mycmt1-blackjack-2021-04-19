@@ -13,6 +13,7 @@ public class Card {
     this.rank = rank;
   }
 
+  //Too Long? Maybe not, maybe in the wrong place
   public int rankValue() {
     if ("JQK".contains(rank)) {
       return 10;
@@ -23,6 +24,7 @@ public class Card {
     }
   }
 
+  //Long Method
   public String display() {
     String[] lines = new String[7];
     lines[0] = "┌─────────┐";

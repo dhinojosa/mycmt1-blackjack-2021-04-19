@@ -16,6 +16,7 @@ public class Game {
   private final List<Card> dealerHand = new ArrayList<>();
   private final List<Card> playerHand = new ArrayList<>();
 
+  //Long Method
   public static void main(String[] args) {
     Game game = new Game();
 
@@ -38,6 +39,7 @@ public class Game {
     deck = new Deck();
   }
 
+  //Long Method
   public void initialDeal() {
 
     // deal first round of cards, players first
@@ -50,6 +52,7 @@ public class Game {
   }
 
   public void play() {
+    //player plays hand
     // get Player's decision: hit until they stand, then they're done (or they go bust)
     boolean playerBusted = false;
     while (!playerBusted) {
@@ -70,13 +73,14 @@ public class Game {
 
     // Dealer makes its choice automatically based on a simple heuristic (<=16, hit, 17>=stand)
     if (!playerBusted) {
-      while (handValueOf(dealerHand) <= 16) {
+      while (handValueOf(dealerHand) <= 16) { //should we call this dealer busted
         dealerHand.add(deck.draw());
       }
     }
 
     displayFinalGameState();
 
+    //display result
     if (playerBusted) {
       System.out.println("You Busted, so you lose.  💸");
     } else if (handValueOf(dealerHand) > 21) {
@@ -90,7 +94,10 @@ public class Game {
     }
   }
 
+  //Is too long?
   public int handValueOf(List<Card> hand) {
+
+      //calculating hand value
     int handValue = hand
         .stream()
         .mapToInt(Card::rankValue)
@@ -115,7 +122,9 @@ public class Game {
     return scanner.nextLine();
   }
 
+  //Long Method, 2 or 3 different items?
   private void displayGameState() {
+      //Show dealer hand
     System.out.print(ansi().eraseScreen().cursor(1, 1));
     System.out.println("Dealer has: ");
     System.out.println(dealerHand.get(0).display()); // first card is Face Up
@@ -150,12 +159,15 @@ public class Game {
                                ansi().cursorUp(6).cursorRight(1).toString())));
   }
 
+  //Long method
   private void displayFinalGameState() {
+    //show final dealer
     System.out.print(ansi().eraseScreen().cursor(1, 1));
     System.out.println("Dealer has: ");
     displayHand(dealerHand);
     System.out.println(" (" + handValueOf(dealerHand) + ")");
 
+    //show final player
     System.out.println();
     System.out.println("Player has: ");
     displayHand(playerHand);
