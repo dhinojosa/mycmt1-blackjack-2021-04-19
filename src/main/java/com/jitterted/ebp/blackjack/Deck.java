@@ -5,26 +5,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-  private final List<Card> cards = new ArrayList<>();
+    private final List<Card> cards = new ArrayList<>(); //sole concern, no
+    // primitive obsession
 
-  //Long Method? Too much going on in constructor,
-  public Deck() {
-    List<String> cardValues = List.of("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
-    List<String> suits = List.of("♠", "♦", "♥", "♣");
-    for (String suit : suits) {
-      for (String cardValue : cardValues) {
-        cards.add(new Card(suit, cardValue));
-      }
+    //Long Method? Too much going on in constructor,
+    public Deck() {
+        List<String> cardValues = List.of("A", "2", "3", "4", "5", "6", "7",
+            "8", "9", "10", "J", "Q", "K");
+        for (Suit suit : Suit.values()) {
+            for (String cardValue : cardValues) {
+                cards.add(new Card(suit, cardValue));
+            }
+        }
+        Collections.shuffle(cards);
     }
-    Collections.shuffle(cards);
-  }
 
-  public int size() {
-    return cards.size();
-  }
+    public int size() {
+        return cards.size();
+    }
 
-  //Issue: What if the cards are exhausted I don't think would work
-  public Card draw() {
-    return cards.remove(0);
-  }
+    //Issue: What if the cards are exhausted I don't think would work
+    public Card draw() {
+        return cards.remove(0);
+    }
 }

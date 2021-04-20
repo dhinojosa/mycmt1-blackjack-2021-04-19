@@ -13,7 +13,9 @@ public class Game {
 
     private final Deck deck;
 
+    //Primitive Obsession
     private final List<Card> dealerHand = new ArrayList<>();
+    //Primitive Obsession
     private final List<Card> playerHand = new ArrayList<>();
 
     public static void main(String[] args) {
