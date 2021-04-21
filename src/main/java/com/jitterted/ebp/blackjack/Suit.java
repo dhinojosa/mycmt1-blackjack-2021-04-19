@@ -1,7 +1,5 @@
 package com.jitterted.ebp.blackjack;
 
-import java.util.Optional;
-
 public enum Suit {
     HEARTS("♥", true),
     SPADES("♠", false),

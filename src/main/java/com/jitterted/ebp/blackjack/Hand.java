@@ -31,10 +31,11 @@ public class Hand {
                     .map(Card::display)
                     .collect(Collectors.joining(
                         ansi().cursorUp(6).cursorRight(1).toString())));
+        System.out.println(" (" + value() + ")");
     }
 
     //Everyone should use this
-    public int value() {
+    private int value() {
         int handValue = calculateHandValue();
         boolean hasAce = containsAtLeastOneAce();
         handValue = calculateAppropriateAceValue(handValue, hasAce);
@@ -59,5 +60,26 @@ public class Hand {
             .stream()
             .mapToInt(Card::rankValue)
             .sum();
+    }
+
+    boolean dealerShouldHit() {
+        return value() <= 16;
+    }
+
+    //Query
+    boolean isBusted() {
+        return value() > 21;
+    }
+
+    boolean beats(Hand other) {
+        return other.value() < value();
+    }
+
+    boolean pushes(Hand other) {
+        return other.value() == value();
+    }
+
+    public boolean containsValue(int value) {
+        return value() == value;
     }
 }

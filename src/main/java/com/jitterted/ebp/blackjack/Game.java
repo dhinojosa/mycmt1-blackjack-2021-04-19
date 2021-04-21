@@ -75,7 +75,7 @@ public class Game {
             }
             if (playerSelectsHit(playerChoice)) {
                 playerHand.dealCardFrom(deck);
-                if (playerBusts()) {
+                if (playerHand.isBusted()) {
                     playerBusted = true;
                 }
             } else {
@@ -89,7 +89,7 @@ public class Game {
         // Dealer makes its choice automatically based on a simple heuristic
         // (<=16, hit, 17>=stand)
         if (!playerBusted) {
-            while (dealerHand.value() <= 16) { //should we call this
+            while (dealerHand.dealerShouldHit()) { //should we call this
                 // dealer busted
                 dealerHand.dealCardFrom(deck);
             }
@@ -100,21 +100,16 @@ public class Game {
         //display result
         if (playerBusted) {
             System.out.println("You Busted, so you lose.  💸");
-        } else if (dealerHand.value() > 21) {
+        } else if (dealerHand.isBusted()) {
             System.out.println("Dealer went BUST, Player wins! Yay for you!! " +
                 "💵");
-        } else if (dealerHand.value() < playerHand.value()) {
+        } else if (playerHand.beats(dealerHand)) {
             System.out.println("You beat the Dealer! 💵");
-        } else if (dealerHand.value() == playerHand.value()) {
+        } else if (playerHand.pushes(dealerHand)) {
             System.out.println("Push: You tie with the Dealer. 💸");
         } else {
             System.out.println("You lost to the Dealer. 💸");
         }
-    }
-
-    //Query
-    private boolean playerBusts() {
-        return playerHand.value() > 21;
     }
 
     //Query
@@ -126,7 +121,6 @@ public class Game {
     private boolean playerSelectStand(String playerChoice) {
         return playerChoice.startsWith("s");
     }
-    //Goal get rid of this.
 
     //Command
     private String inputFromPlayer() {
@@ -172,14 +166,11 @@ public class Game {
         System.out.println();
         System.out.println("Player has: ");
         playerHand.displayHand();
-        System.out.println(" (" + playerHand.value() + ")");
     }
 
     private void displayFinalDealerHand() {
-        //show final dealer
         System.out.print(ansi().eraseScreen().cursor(1, 1));
         System.out.println("Dealer has: ");
         dealerHand.displayHand();
-        System.out.println(" (" + dealerHand.value() + ")");
     }
 }
