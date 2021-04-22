@@ -48,7 +48,7 @@ public class Hand {
     }
 
     private int calculateAppropriateAceValue(int handValue, boolean hasAce) {
-        if (hasAce && handValue < 11) {
+        if (hasAce && handValue <= 11) {
             handValue += 10;
         }
         return handValue;
