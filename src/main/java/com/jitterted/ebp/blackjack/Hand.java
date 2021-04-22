@@ -25,13 +25,18 @@ public class Hand {
         return cardList.get(0);
     }
 
+    //This is hard to test..probably could not
     void displayHand() {
-        System.out.println(
-            cardList.stream()
-                    .map(Card::display)
-                    .collect(Collectors.joining(
-                        ansi().cursorUp(6).cursorRight(1).toString())));
+        System.out.println(displayAllCards());
         System.out.println(" (" + value() + ")");
+    }
+
+    //This is testable
+    public String displayAllCards() {
+        return cardList.stream()
+                       .map(Card::display)
+                       .collect(Collectors.joining(
+                           ansi().cursorUp(6).cursorRight(1).toString()));
     }
 
     //Everyone should use this
