@@ -5,10 +5,7 @@ import org.fusesource.jansi.Ansi;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Card {
-    //Primitive Obsession
-    // wnat to get rid of this...
     private final Suit suit;
-    //Primitive Obsession
     private final String rank;
 
     public Card(Suit suit, String rank) {
