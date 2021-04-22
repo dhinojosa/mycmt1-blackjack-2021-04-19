@@ -47,4 +47,13 @@ public class WalletTest {
             .hasMessage("Money should be positive")
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void testWalletAdd35AndThen70ShouldBe105() {
+        Wallet wallet = new Wallet();
+        wallet.addMoney(35);
+        wallet.addMoney(70);
+        assertThat(wallet.balance()).isEqualTo(105);
+    }
+
 }
